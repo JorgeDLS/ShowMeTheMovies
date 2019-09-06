@@ -1,0 +1,19 @@
+apply plugin: 'kotlin'
+
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = "$rootProject.jvmCompat"
+targetCompatibility = "$rootProject.jvmCompat"
+
+dependencies {
+  def domainDependencies = rootProject.ext.domainDependencies
+  def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+  implementation domainDependencies.dagger
+  implementation domainDependencies.rxAndroid
+  api domainDependencies.kotlin
+
+  testImplementation domainTestDependencies.junit
+  testImplementation domainTestDependencies.mockito
+  testImplementation domainTestDependencies.assertj
+}

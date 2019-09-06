@@ -4,32 +4,93 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.0"
-    defaultConfig {
-        applicationId "jdls.one.showmethemovies"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  compileSdkVersion rootProject.ext.androidCompileSdkVersion
+  buildToolsVersion rootProject.ext.androidBuildToolsVersion
+  defaultConfig {
+    applicationId "jdls.one.showmethemovies"
+    minSdkVersion rootProject.ext.androidMinSdkVersion
+    targetSdkVersion rootProject.ext.androidTargetSdkVersion
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+  }
+  compileOptions {
+    sourceCompatibility "$rootProject.jvmCompat"
+    targetCompatibility "$rootProject.jvmCompat"
+  }
+  androidExtensions {
+    experimental = true
+  }
+}
+
+kapt {
+  correctErrorTypes = true
+  generateStubs = true
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+  def appDependencies = rootProject.ext.appDependencies
+  def appTestDependencies = rootProject.ext.appTestDependencies
+
+  implementation project(':domain')
+  implementation project(':data')
+
+  implementation appDependencies.dagger
+  implementation appDependencies.daggerSupport
+  implementation appDependencies.appCompat
+  implementation appDependencies.material
+  implementation appDependencies.coreKtx
+  implementation appDependencies.lifeCycle
+  implementation appDependencies.constraintLayout
+  implementation appDependencies.glide
+  implementation appDependencies.rxAndroid
+  implementation appDependencies.archRuntime
+  implementation appDependencies.roomRxJava
+
+  testImplementation appTestDependencies.junit
+  testImplementation appTestDependencies.mockito
+  testImplementation appTestDependencies.archTesting
+
+  androidTestImplementation appTestDependencies.testRunner
+  androidTestImplementation appTestDependencies.espresso
+  androidTestImplementation appTestDependencies.junit
+  androidTestImplementation appTestDependencies.mockito
+  androidTestImplementation appTestDependencies.mockitoAndroid
+  androidTestImplementation(appTestDependencies.espressoCore) {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(appTestDependencies.androidRunner) {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(appTestDependencies.androidRules) {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(appTestDependencies.espressoIntents) {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(appTestDependencies.espressoContrib) {
+    exclude module: 'appcompat'
+    exclude module: 'appcompat-v7'
+    exclude module: 'support-v4'
+    exclude module: 'support-v13'
+    exclude module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
+    exclude module: 'design'
+  }
+
+  kapt appDependencies.daggerCompiler
+  kapt appDependencies.daggerProcessor
+  kapt appDependencies.archCompiler
+
+  kaptTest appDependencies.daggerCompiler
+  kaptAndroidTest appDependencies.daggerCompiler
 }

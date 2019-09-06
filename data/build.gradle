@@ -1,0 +1,26 @@
+apply plugin: 'kotlin'
+
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = "$rootProject.jvmCompat"
+targetCompatibility = "$rootProject.jvmCompat"
+
+dependencies {
+  def dataDependencies = rootProject.ext.dataDependencies
+  def dataTestDependencies = rootProject.ext.dataTestDependencies
+
+  api project(':domain')
+  api dataDependencies.rxJava
+
+  implementation dataDependencies.dagger
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofitConverter
+  implementation dataDependencies.retrofitAdapter
+  implementation dataDependencies.okHttp
+  implementation dataDependencies.okHttpLoggingInt
+
+  testImplementation dataTestDependencies.junit
+  testImplementation dataTestDependencies.kotlinJUnit
+  testImplementation dataTestDependencies.mockito
+  testImplementation dataTestDependencies.assertj
+}
