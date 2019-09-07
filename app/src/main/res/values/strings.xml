@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">ShowMeTheMovies</string>
+  <string name="labelEmptyResult">Sorry, there are no results</string>
+  <string name="labelErrorResult">Oops! something went wrong</string>
+  <string name="buttonCheckAgain">Check again</string>
+  <string name="actionTryAgain">Try again</string>
 </resources>
