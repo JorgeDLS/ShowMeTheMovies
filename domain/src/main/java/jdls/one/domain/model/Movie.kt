@@ -1,7 +1,8 @@
 package jdls.one.domain.model
 
 data class Movie(
-    val title: String,
-    val voteAverage: Number,
-    val backDropUrl: String
+  val id: Int,
+  val title: String,
+  val voteAverage: Double,
+  val backDropUrl: String
 )

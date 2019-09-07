@@ -11,7 +11,7 @@ open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults,
    */
   override fun mapFromApi(raw: MovieSearchResults): List<Movie> =
     raw.results.map {
-      Movie(it.name, it.voteAverage, buildBackdropCompletePath(it.backdropPath))
+      Movie(it.id, it.name, it.voteAverage, buildBackdropCompletePath(it.backdropPath))
     }
 
   /**

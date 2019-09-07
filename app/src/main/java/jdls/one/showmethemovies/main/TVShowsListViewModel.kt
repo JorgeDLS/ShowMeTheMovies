@@ -33,12 +33,12 @@ open class TVShowsListViewModel @Inject internal constructor(
   fun fetchPopularTVShows() {
     moviesLiveData.postValue(Resource(ResourceState.LOADING, null, null))
     return getPopularTVShows.execute(
-      GetFavoriteRecipeSubscriber(),
+      GetPopularTVShowsSubscriber(),
       Pair("en_US", 1)
-    ) //Hardcoded for new
+    ) //Hardcoded for now
   }
 
-  inner class GetFavoriteRecipeSubscriber : DisposableSingleObserver<List<Movie>>() {
+  inner class GetPopularTVShowsSubscriber : DisposableSingleObserver<List<Movie>>() {
     override fun onSuccess(t: List<Movie>) {
       moviesLiveData.postValue(Resource(ResourceState.SUCCESS, t, null))
     }

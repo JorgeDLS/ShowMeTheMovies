@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
   private fun setupRecyclerView() {
     recyclerView.setHasFixedSize(true)
     recyclerView.setItemViewCacheSize(20)
-    recyclerView.setDrawingCacheEnabled(true)
     recyclerView.adapter = moviesAdapter
   }
 }
