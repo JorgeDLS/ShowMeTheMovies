@@ -28,8 +28,7 @@ ext {
   javaxInjectVersion = '1'
   androidAnnotationsVersion = '21.0.3'
   daggerVersion = '2.11'
-  archVersion = '2.0.0'
-  roomVersion = '2.0.0'
+  archVersion = '2.1.0'
 
   //Testing
   jUnitVersion = '4.12'
@@ -86,7 +85,7 @@ ext {
       rxAndroid       : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       archRuntime     : "android.arch.lifecycle:runtime:${archVersion}",
       archCompiler    : "android.arch.lifecycle:common-java8:${archVersion}",
-      roomRxJava      : "android.arch.persistence.room:rxjava2:${roomVersion}"
+      roomRxJava      : "android.arch.persistence.room:rxjava2:${archVersion}"
   ]
 
   appTestDependencies = [
@@ -114,8 +113,8 @@ ext {
       javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
       androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
-      roomRuntime       : "android.arch.persistence.room:runtime:${roomVersion}",
-      roomCompiler      : "android.arch.persistence.room:compiler:${roomVersion}",
+      roomRuntime       : "android.arch.persistence.room:runtime:${archVersion}",
+      roomCompiler      : "android.arch.persistence.room:compiler:${archVersion}",
   ]
 
   cacheTestDependencies = [
@@ -124,8 +123,8 @@ ext {
       assertj      : "org.assertj:assertj-core:${assertJVersion}",
       mockito      : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
       robolectric  : "org.robolectric:robolectric:${robolectricVersion}",
-      roomTesting  : "android.arch.persistence.room:testing:${roomVersion}",
-      archTesting  : "android.arch.core:core-testing:${roomVersion}",
+      roomTesting  : "android.arch.persistence.room:testing:${archVersion}",
+      archTesting  : "android.arch.core:core-testing:${archVersion}",
       supportRunner: "com.android.support.test:runner:${androidSupportRunnerVersion}",
       supportRules : "com.android.support.test:rules:${androidSupportRulesVersion}"
   ]

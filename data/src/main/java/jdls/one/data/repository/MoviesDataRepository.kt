@@ -11,13 +11,13 @@ import jdls.one.domain.repository.MoviesRepository
 import javax.inject.Inject
 
 class MoviesDataRepository @Inject constructor(
-  private val apiDataSourceApiDataSource: MoviesApiDataSource,
+  private val apiDataSource: MoviesApiDataSource,
   private val cacheDataSource: MoviesCacheDataSource,
   private val entityMapper: MoviesSearchMapper
 ) : MoviesRepository {
 
   override fun getPopularTVShows(language: String, page: Int): Single<List<Movie>> {
-    return apiDataSourceApiDataSource.getPopularTVShows(language, page)
+    return apiDataSource.getPopularTVShows(language, page)
       .map { entityMapper.mapFromApi(it) }
   }
 }
