@@ -3,5 +3,6 @@
   <string name="labelEmptyResult">Sorry, there are no results</string>
   <string name="labelErrorResult">Oops! something went wrong</string>
   <string name="buttonCheckAgain">Check again</string>
-  <string name="actionTryAgain">Try again</string>
+  <string name="labelTryAgain">Try again</string>
+  <string name="labelMovieImage">Movie image</string>
 </resources>

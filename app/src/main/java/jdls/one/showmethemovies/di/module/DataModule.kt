@@ -23,7 +23,7 @@ abstract class DataModule {
   }
 
   @Binds
-  abstract fun bindMoviesRepository(recipeDataRepository: MoviesDataRepository): MoviesRepository
+  abstract fun bindMoviesRepository(moviesDataRepository: MoviesDataRepository): MoviesRepository
 
   @Binds
   abstract fun bindThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor

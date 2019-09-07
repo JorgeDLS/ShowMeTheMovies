@@ -1,7 +1,9 @@
 package jdls.one.showmethemovies.util
 
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.StringRes
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
 fun View.visible() {
@@ -24,4 +26,10 @@ fun View.showSnackbar(
 fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (View) -> Unit) {
   setAction(actionRes, listener)
   color?.let { setActionTextColor(color) }
+}
+
+fun ImageView.loadImage(url: String) {
+  Glide.with(context)
+    .load(url)
+    .into(this)
 }

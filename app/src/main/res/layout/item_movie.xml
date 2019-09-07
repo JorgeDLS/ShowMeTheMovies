@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="180dp">
+
+  <ImageView
+    android:id="@+id/movieIV"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/labelMovieImage"
+    android:scaleType="centerCrop"
+    tools:src="@tools:sample/backgrounds/scenic" />
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/blackWith50Alpha">
+
+    <TextView
+      android:id="@+id/ratingTV"
+      style="@style/TextAppearance.AppCompat.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:layout_marginStart="@dimen/activityMargin"
+      android:layout_marginEnd="@dimen/activityMargin"
+      android:gravity="center_vertical"
+      android:textColor="@color/white"
+      android:textStyle="bold"
+      tools:text="9.0" />
+
+    <TextView
+      android:id="@+id/titleTV"
+      style="@style/TextAppearance.AppCompat.Large"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_centerVertical="true"
+      android:layout_marginStart="@dimen/activityMargin"
+      android:layout_toStartOf="@id/ratingTV"
+      android:ellipsize="end"
+      android:gravity="center_vertical|start"
+      android:maxLines="1"
+      android:textColor="@color/white"
+      tools:text="The Sopranos" />
+
+  </RelativeLayout>
+
+</RelativeLayout>
