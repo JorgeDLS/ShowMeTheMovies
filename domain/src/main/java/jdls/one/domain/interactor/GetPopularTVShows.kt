@@ -12,9 +12,9 @@ open class GetPopularTVShows @Inject constructor(
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
 ) :
-    SingleUseCase<List<Movie>, Void?>(threadExecutor, postExecutionThread) {
+    SingleUseCase<List<Movie>, Pair<String, Int>>(threadExecutor, postExecutionThread) {
 
-  public override fun buildUseCaseObservable(params: Void?): Single<List<Movie>> {
-    return moviesRepository.getPopularTVShows()
+  public override fun buildUseCaseObservable(params: Pair<String, Int>): Single<List<Movie>> {
+    return moviesRepository.getPopularTVShows(params.first, params.second)
   }
 }

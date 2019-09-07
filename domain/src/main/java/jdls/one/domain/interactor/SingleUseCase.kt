@@ -21,12 +21,12 @@ abstract class SingleUseCase<T, in Params> constructor(
   /**
    * Builds a [Single] which will be used when the current [SingleUseCase] is executed.
    */
-  protected abstract fun buildUseCaseObservable(params: Params? = null): Single<T>
+  protected abstract fun buildUseCaseObservable(params: Params): Single<T>
 
   /**
    * Executes the current use case.
    */
-  open fun execute(observer: DisposableSingleObserver<T>, params: Params? = null) {
+  open fun execute(observer: DisposableSingleObserver<T>, params: Params) {
     val observable = this.buildUseCaseObservable(params)
         .subscribeOn(Schedulers.from(threadExecutor))
         .observeOn(postExecutionThread.scheduler) as Single<T>
