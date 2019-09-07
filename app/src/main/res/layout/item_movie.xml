@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="180dp">
+  android:layout_height="@dimen/movieItemHeight">
 
   <ImageView
     android:id="@+id/movieIV"
@@ -14,7 +14,7 @@
 
   <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="@dimen/translucentBarHeight"
     android:layout_alignParentBottom="true"
     android:background="@color/blackWith50Alpha">
 
@@ -30,7 +30,7 @@
       android:gravity="center_vertical"
       android:textColor="@color/white"
       android:textStyle="bold"
-      tools:text="9.0" />
+      tools:text="8.7" />
 
     <TextView
       android:id="@+id/titleTV"
@@ -44,7 +44,7 @@
       android:gravity="center_vertical|start"
       android:maxLines="1"
       android:textColor="@color/white"
-      tools:text="The Sopranos" />
+      tools:text="Marvel's Agents of S.H.I.E.L.D." />
 
   </RelativeLayout>
 

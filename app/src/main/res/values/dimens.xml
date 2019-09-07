@@ -1,3 +1,6 @@
 <resources>
   <dimen name="activityMargin">16dp</dimen>
+  <dimen name="movieItemHeight">180dp</dimen>
+  <dimen name="translucentBarHeight">40dp</dimen>
+  <dimen name="viewEmptyIconSize">144dp</dimen>
 </resources>

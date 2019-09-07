@@ -7,10 +7,10 @@
 
     <ImageView
       android:id="@+id/emptyIV"
-      android:layout_width="144dp"
-      android:layout_height="144dp"
+      android:layout_width="@dimen/viewEmptyIconSize"
+      android:layout_height="@dimen/viewEmptyIconSize"
       android:layout_centerInParent="true"
-      android:layout_margin="16dp"
+      android:layout_margin="@dimen/activityMargin"
       android:src="@drawable/ic_empty"
       android:text="@string/buttonCheckAgain" />
 
@@ -21,9 +21,9 @@
       android:layout_height="wrap_content"
       android:layout_below="@+id/emptyIV"
       android:layout_centerHorizontal="true"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      android:layout_marginBottom="16dp"
+      android:layout_marginStart="@dimen/activityMargin"
+      android:layout_marginEnd="@dimen/activityMargin"
+      android:layout_marginBottom="@dimen/activityMargin"
       android:text="@string/labelEmptyResult" />
 
   </RelativeLayout>
