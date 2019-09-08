@@ -18,8 +18,8 @@ open class TVShowsListViewModel @Inject internal constructor(
 
   private val moviesLiveData: MutableLiveData<Resource<List<Movie>>> =
     MutableLiveData()
-  private var currentPage: Int = 1
-  private var totalPages: Int = 1
+  internal var currentPage: Int = 1
+  internal var totalPages: Int = 1
 
   init {
     fetchPopularTVShows()
