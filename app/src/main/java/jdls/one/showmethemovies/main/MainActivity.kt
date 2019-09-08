@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.android.AndroidInjection
 import jdls.one.domain.model.Movie
 import jdls.one.showmethemovies.R
@@ -53,15 +55,13 @@ class MainActivity : AppCompatActivity() {
 
   private fun setupScreenForLoadingState() {
     progress.visible()
-    recyclerView.gone()
     viewEmpty.gone()
   }
 
   private fun setupScreenForSuccess(data: List<Movie>) {
     progress.gone()
     if (data.isNotEmpty()) {
-      moviesAdapter.movieList = data
-      moviesAdapter.notifyDataSetChanged()
+      moviesAdapter.addMovies(data)
       recyclerView.visible()
     } else {
       viewEmpty.visible()
@@ -79,8 +79,19 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setupRecyclerView() {
-    recyclerView.setHasFixedSize(true)
-    recyclerView.setItemViewCacheSize(20)
-    recyclerView.adapter = moviesAdapter
+    with(recyclerView) {
+      setHasFixedSize(true)
+      setItemViewCacheSize(20)
+      adapter = moviesAdapter
+      val linearLayoutManager = layoutManager as LinearLayoutManager
+      addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+          if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.itemCount - 1) {
+            viewModel.requestMoreData()
+          }
+          super.onScrollStateChanged(recyclerView, newState)
+        }
+      })
+    }
   }
 }

@@ -7,6 +7,7 @@ import jdls.one.data.model.MovieSearchResults
 import jdls.one.data.source.MoviesApiDataSource
 import jdls.one.data.source.MoviesCacheDataSource
 import jdls.one.domain.model.Movie
+import jdls.one.domain.model.MovieResults
 import jdls.one.domain.repository.MoviesRepository
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class MoviesDataRepository @Inject constructor(
   private val entityMapper: MoviesSearchMapper
 ) : MoviesRepository {
 
-  override fun getPopularTVShows(language: String, page: Int): Single<List<Movie>> {
+  override fun getPopularTVShows(language: String, page: Int): Single<MovieResults> {
     return apiDataSource.getPopularTVShows(language, page)
       .map { entityMapper.mapFromApi(it) }
   }

@@ -2,17 +2,26 @@ package jdls.one.data.mapper
 
 import jdls.one.data.model.MovieSearchResults
 import jdls.one.domain.model.Movie
+import jdls.one.domain.model.MovieResults
 import javax.inject.Inject
 
-open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults, List<Movie>> {
+open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults, MovieResults> {
 
   /**
-   * Map an instance of a [MovieSearchResults] to a List of [Movie] models
+   * Map an instance of a [MovieSearchResults] to a [MovieResults] model
    */
-  override fun mapFromApi(raw: MovieSearchResults): List<Movie> =
-    raw.results.map {
-      Movie(it.id, it.name, it.voteAverage, buildBackdropCompletePath(it.backdropPath))
-    }
+  override fun mapFromApi(raw: MovieSearchResults): MovieResults =
+    MovieResults(
+      raw.results.map {
+        Movie(
+          it.id,
+          it.name,
+          it.voteAverage,
+          buildBackdropCompletePath(it.backdropPath)
+        )
+      },
+      raw.totalPages
+    )
 
   /**
    * Builds the complete image path.
@@ -21,6 +30,6 @@ open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults,
    * and refreshed once a week at least, but for the sake of simplicity this will use
    * hardcoded values retrieved from that Configuration model through the API documentation.
    */
-  private fun buildBackdropCompletePath(backdropPath: String): String =
-    "https://image.tmdb.org/t/p/w1280$backdropPath"
+  private fun buildBackdropCompletePath(backdropPath: String?): String =
+    backdropPath?.let { "https://image.tmdb.org/t/p/w1280$backdropPath" } ?: ""
 }

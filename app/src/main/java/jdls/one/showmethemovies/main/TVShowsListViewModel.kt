@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.observers.DisposableSingleObserver
 import jdls.one.domain.interactor.GetPopularTVShows
 import jdls.one.domain.model.Movie
+import jdls.one.domain.model.MovieResults
 import jdls.one.showmethemovies.state.Resource
 import jdls.one.showmethemovies.state.ResourceState
+import java.util.*
 import javax.inject.Inject
 
 open class TVShowsListViewModel @Inject internal constructor(
@@ -16,6 +18,8 @@ open class TVShowsListViewModel @Inject internal constructor(
 
   private val moviesLiveData: MutableLiveData<Resource<List<Movie>>> =
     MutableLiveData()
+  private var currentPage: Int = 1
+  private var totalPages: Int = 1
 
   init {
     fetchPopularTVShows()
@@ -34,13 +38,19 @@ open class TVShowsListViewModel @Inject internal constructor(
     moviesLiveData.postValue(Resource(ResourceState.LOADING, null, null))
     return getPopularTVShows.execute(
       GetPopularTVShowsSubscriber(),
-      Pair("en_US", 1)
-    ) //Hardcoded for now
+      Pair(Locale.getDefault().language, currentPage)
+    )
   }
 
-  inner class GetPopularTVShowsSubscriber : DisposableSingleObserver<List<Movie>>() {
-    override fun onSuccess(t: List<Movie>) {
-      moviesLiveData.postValue(Resource(ResourceState.SUCCESS, t, null))
+  fun requestMoreData() {
+    currentPage++
+    if (currentPage <= totalPages) fetchPopularTVShows()
+  }
+
+  inner class GetPopularTVShowsSubscriber : DisposableSingleObserver<MovieResults>() {
+    override fun onSuccess(movieResults: MovieResults) {
+      totalPages = movieResults.totalPages
+      moviesLiveData.postValue(Resource(ResourceState.SUCCESS, movieResults.movies, null))
     }
 
     override fun onError(exception: Throwable) {

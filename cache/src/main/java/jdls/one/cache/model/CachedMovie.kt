@@ -11,5 +11,5 @@ data class CachedMovie(
   var id: Int,
   var title: String,
   val voteAverage: Double,
-  val backDropUrl: String
+  val backDropUrl: String?
 )

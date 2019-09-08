@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_movie.*
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-  var movieList: List<Movie> = arrayListOf()
+  private var movieList: MutableList<Movie> = ArrayList()
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val movie = movieList[position]
@@ -30,6 +30,12 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
   override fun getItemCount(): Int {
     return movieList.size
+  }
+
+  fun addMovies(movies: List<Movie>) {
+    val listSize = movieList.size
+    movieList.addAll(movies)
+    if (listSize > 0) notifyItemRangeChanged(listSize, movies.size) else notifyDataSetChanged()
   }
 
   inner class ViewHolder(override val containerView: View) :

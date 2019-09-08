@@ -28,8 +28,10 @@ fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (Vi
   color?.let { setActionTextColor(color) }
 }
 
-fun ImageView.loadImage(url: String) {
-  Glide.with(context)
-    .load(url)
-    .into(this)
+fun ImageView.loadImage(url: String?) {
+  url?.let {
+    Glide.with(context)
+      .load(url)
+      .into(this)
+  }
 }

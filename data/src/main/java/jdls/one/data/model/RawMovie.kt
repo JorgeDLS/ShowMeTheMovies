@@ -1,10 +1,10 @@
 package jdls.one.data.model
 
-data class MovieResult(
+data class RawMovie(
     val posterPath: String?,
     val popularity: Double,
     val id: Int,
-    val backdropPath: String,
+    val backdropPath: String?,
     val voteAverage: Double,
     val overview: String?,
     val firstAirDate: String,
