@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import jdls.one.showmethemovies.R
 
 fun View.visible() {
   visibility = View.VISIBLE
@@ -29,9 +30,8 @@ fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (Vi
 }
 
 fun ImageView.loadImage(url: String?) {
-  url?.let {
-    Glide.with(context)
-      .load(url)
-      .into(this)
-  }
+  Glide.with(context)
+    .load(url)
+    .error(R.color.colorSecondaryDark)
+    .into(this)
 }

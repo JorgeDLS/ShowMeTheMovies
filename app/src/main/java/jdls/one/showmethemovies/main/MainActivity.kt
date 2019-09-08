@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
       val linearLayoutManager = layoutManager as LinearLayoutManager
       addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-          if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.itemCount - 1) {
+          if (linearLayoutManager.findLastVisibleItemPosition() == linearLayoutManager.itemCount - 1) {
             viewModel.requestMoreData()
           }
           super.onScrollStateChanged(recyclerView, newState)
