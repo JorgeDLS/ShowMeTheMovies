@@ -30,6 +30,6 @@ open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults,
    * and refreshed once a week at least, but for the sake of simplicity this will use
    * hardcoded values retrieved from that Configuration model through the API documentation.
    */
-  private fun buildBackdropCompletePath(backdropPath: String?): String =
+  fun buildBackdropCompletePath(backdropPath: String?): String =
     backdropPath?.let { "https://image.tmdb.org/t/p/w1280$backdropPath" } ?: ""
 }

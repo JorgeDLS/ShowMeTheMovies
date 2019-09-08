@@ -25,5 +25,5 @@ abstract class CacheModule {
   }
 
   @Binds
-  abstract fun bindRecipeCache(recipeCacheImpl: MovieCacheImpl): MoviesCache
+  abstract fun bindMoviesCache(movieCacheImpl: MovieCacheImpl): MoviesCache
 }

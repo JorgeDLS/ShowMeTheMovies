@@ -38,7 +38,7 @@ open class TVShowsListViewModel @Inject internal constructor(
     moviesLiveData.postValue(Resource(ResourceState.LOADING, null, null))
     return getPopularTVShows.execute(
       GetPopularTVShowsSubscriber(),
-      Pair(Locale.getDefault().language, currentPage)
+      Pair(Locale.getDefault().toString(), currentPage)
     )
   }
 
