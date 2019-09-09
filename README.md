@@ -15,7 +15,7 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Glide is used for image loading.
 * For testing the application, Mockito, jUnit4, assertJ and espresso are used.
 
-![App example Gif](app/appGifExample.gif)
+<img src="app/appGifExample.gif" width="180" alt="App example Gif">
 
 ## Working Scenario
 * This project has been developed using Android Studio 3.5 (latest in that moment), with Kotlin plugin v1.3.50 and Android Gradle Plugin 3.5.0.
