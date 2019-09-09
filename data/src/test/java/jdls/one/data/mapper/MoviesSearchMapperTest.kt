@@ -1,6 +1,6 @@
 package jdls.one.data.mapper
 
-import jdls.one.data.model.MovieSearchResults
+import jdls.one.data.model.RawMovieSearchResults
 import jdls.one.data.utils.anyMovieSearchResults
 import jdls.one.domain.model.MovieResults
 import org.junit.Before
@@ -29,15 +29,15 @@ class MoviesSearchMapperTest {
   }
 
   private fun assertDataIsEqual(
-    movieSearchResults: MovieSearchResults,
+    rawMovieSearchResults: RawMovieSearchResults,
     movieResults: MovieResults
   ) {
-    assertEquals(movieSearchResults.totalPages, movieResults.totalPages)
-    assertEquals(movieSearchResults.results[0].id, movieResults.movies[0].id)
-    assertEquals(movieSearchResults.results[0].name, movieResults.movies[0].title)
-    assertEquals(movieSearchResults.results[0].voteAverage, movieResults.movies[0].voteAverage)
+    assertEquals(rawMovieSearchResults.totalPages, movieResults.totalPages)
+    assertEquals(rawMovieSearchResults.results[0].id, movieResults.movies[0].id)
+    assertEquals(rawMovieSearchResults.results[0].name, movieResults.movies[0].title)
+    assertEquals(rawMovieSearchResults.results[0].voteAverage, movieResults.movies[0].voteAverage)
     assertEquals(
-      moviesSearchMapper.buildBackdropCompletePath(movieSearchResults.results[0].backdropPath),
+      moviesSearchMapper.buildBackdropCompletePath(rawMovieSearchResults.results[0].backdropPath),
       movieResults.movies[0].backDropUrl
     )
   }

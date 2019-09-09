@@ -1,11 +1,11 @@
-package jdls.one.cache.db
+package jdls.one.data.cache.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import jdls.one.cache.dao.CachedMovieDao
-import jdls.one.cache.model.CachedMovie
+import jdls.one.data.cache.dao.CachedMovieDao
+import jdls.one.data.model.CachedMovie
 import javax.inject.Inject
 
 @Database(entities = [CachedMovie::class], version = 1, exportSchema = false)

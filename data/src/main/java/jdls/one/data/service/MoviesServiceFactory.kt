@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
-import jdls.one.data.model.MovieSearchResults
+import jdls.one.data.model.RawMovieSearchResults
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -85,7 +85,7 @@ object MoviesServiceFactory {
     fun getPopularTVShows(
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Single<MovieSearchResults>
+    ): Single<RawMovieSearchResults>
 
   }
 }

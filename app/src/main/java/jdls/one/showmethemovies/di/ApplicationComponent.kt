@@ -6,7 +6,6 @@ import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import jdls.one.showmethemovies.ShowMeTheMoviesApplication
 import jdls.one.showmethemovies.di.module.ApplicationModule
-import jdls.one.showmethemovies.di.module.CacheModule
 import jdls.one.showmethemovies.di.module.DataModule
 import jdls.one.showmethemovies.di.module.ViewModule
 import javax.inject.Singleton
@@ -17,7 +16,6 @@ import javax.inject.Singleton
     ApplicationModule::class,
     AndroidSupportInjectionModule::class,
     DataModule::class,
-    CacheModule::class,
     ViewModule::class]
 )
 interface ApplicationComponent {

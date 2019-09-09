@@ -7,7 +7,6 @@ import dagger.android.support.AndroidSupportInjectionModule
 import jdls.one.domain.executor.PostExecutionThread
 import jdls.one.domain.repository.MoviesRepository
 import jdls.one.showmethemovies.di.module.TestApplicationModule
-import jdls.one.showmethemovies.di.module.TestCacheModule
 import jdls.one.showmethemovies.di.module.TestDataModule
 import jdls.one.showmethemovies.di.module.ViewModule
 import jdls.one.showmethemovies.test.TestApplication
@@ -18,7 +17,6 @@ import javax.inject.Singleton
   modules = [
     TestApplicationModule::class,
     AndroidSupportInjectionModule::class,
-    TestCacheModule::class,
     TestDataModule::class,
     ViewModule::class]
 )

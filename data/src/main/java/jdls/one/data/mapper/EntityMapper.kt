@@ -1,4 +1,4 @@
-package jdls.one.cache.mapper
+package jdls.one.data.mapper
 
 interface EntityMapper<T, V> {
 

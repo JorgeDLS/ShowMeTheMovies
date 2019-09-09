@@ -1,11 +1,11 @@
 package jdls.one.data.utils
 
-import jdls.one.data.model.MovieSearchResults
+import jdls.one.data.model.RawMovieSearchResults
 import jdls.one.data.model.RawMovie
 import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
 
-fun anyMovieSearchResults() = MovieSearchResults(1, listOf(anyRawMovie()), 40, 2)
+fun anyMovieSearchResults() = RawMovieSearchResults(1, listOf(anyRawMovie()), 40, 2)
 
 fun anyRawMovie() = RawMovie(
   "",

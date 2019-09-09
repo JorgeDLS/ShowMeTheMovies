@@ -1,11 +1,11 @@
-package jdls.one.cache.dao
+package jdls.one.data.cache.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import jdls.one.cache.db.constants.MovieConstants
-import jdls.one.cache.model.CachedMovie
+import jdls.one.data.cache.db.constants.MovieConstants
+import jdls.one.data.model.CachedMovie
 
 @Dao
 abstract class CachedMovieDao {

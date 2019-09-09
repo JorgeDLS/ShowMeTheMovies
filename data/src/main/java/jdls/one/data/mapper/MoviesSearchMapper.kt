@@ -1,16 +1,16 @@
 package jdls.one.data.mapper
 
-import jdls.one.data.model.MovieSearchResults
+import jdls.one.data.model.RawMovieSearchResults
 import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
 import javax.inject.Inject
 
-open class MoviesSearchMapper @Inject constructor() : Mapper<MovieSearchResults, MovieResults> {
+open class MoviesSearchMapper @Inject constructor() : Mapper<RawMovieSearchResults, MovieResults> {
 
   /**
-   * Map an instance of a [MovieSearchResults] to a [MovieResults] model
+   * Map an instance of a [RawMovieSearchResults] to a [MovieResults] model
    */
-  override fun mapFromApi(raw: MovieSearchResults): MovieResults =
+  override fun mapFromApi(raw: RawMovieSearchResults): MovieResults =
     MovieResults(
       raw.results.map {
         Movie(

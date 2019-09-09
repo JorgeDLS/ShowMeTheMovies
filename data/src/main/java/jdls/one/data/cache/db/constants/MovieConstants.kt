@@ -1,4 +1,4 @@
-package jdls.one.cache.db.constants
+package jdls.one.data.cache.db.constants
 
 object MovieConstants {
 
