@@ -1,7 +1,9 @@
 package jdls.one.showmethemovies.main
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
@@ -11,9 +13,11 @@ import io.reactivex.Single
 import jdls.one.domain.model.MovieResults
 import jdls.one.showmethemovies.R
 import jdls.one.showmethemovies.test.TestApplication
+import jdls.one.showmethemovies.test.utils.aLotOfMovieResults
 import jdls.one.showmethemovies.test.utils.anyMovieResults
 import jdls.one.showmethemovies.test.utils.anyMovieTitle
 import jdls.one.showmethemovies.test.utils.atPosition
+import kotlinx.android.synthetic.main.activity_main.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,6 +60,20 @@ class MainActivityTest {
           0,
           hasDescendant(withText(anyMovieTitle()))
         )
+      )
+    )
+  }
+
+  @Test
+  fun recyclerViewIsScrollable() {
+    stubMoviesRepositoryGetPopularTVShows(Single.just(aLotOfMovieResults()))
+
+    activityTestRule.launchActivity(null)
+    val index = activityTestRule.activity.recyclerView.adapter!!.itemCount - 1
+
+    onView(withId(R.id.recyclerView)).perform(
+      RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+        index
       )
     )
   }

@@ -1,5 +1,9 @@
 package jdls.one.data.source
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.atLeastOnce
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
 import jdls.one.data.mapper.RemoteMapper
 import jdls.one.data.service.MoviesServiceFactory
 import org.junit.Before
@@ -43,4 +47,16 @@ class MoviesApiDataSourceTest {
     testObserver.assertError(HttpException::class.java)
     testObserver.dispose()
   }
+
+  @Test
+  fun getPopularTVShowsUsesTheMapper() {
+    remoteMapper = spy(remoteMapper)
+    moviesApiDataSource = MoviesApiDataSource(moviesService, remoteMapper)
+
+    moviesApiDataSource.getPopularTVShows(Locale.getDefault().toString(), 1).test()
+
+    verify(remoteMapper, atLeastOnce()).map(any())
+
+  }
+
 }

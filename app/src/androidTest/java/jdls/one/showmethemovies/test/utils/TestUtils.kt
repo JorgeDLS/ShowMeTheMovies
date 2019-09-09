@@ -9,7 +9,9 @@ import jdls.one.domain.model.MovieResults
 import org.hamcrest.Matcher
 
 
-fun anyMovieResults(): MovieResults = MovieResults(listOf(anyMovie()), 1)
+fun anyMovieResults(): MovieResults = MovieResults(listOf(anyMovie()), 2)
+
+fun aLotOfMovieResults(): MovieResults = MovieResults((1..20).map { anyMovie() }.toList(), 2)
 
 fun anyMovie(): Movie = Movie(12, anyMovieTitle(), 98.31, null)
 
