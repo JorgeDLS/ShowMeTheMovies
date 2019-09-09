@@ -3,7 +3,7 @@ package jdls.one.data.source
 import io.reactivex.Completable
 import io.reactivex.Single
 import jdls.one.data.cache.db.MovieDatabase
-import jdls.one.data.mapper.CachedMovieMapper
+import jdls.one.data.mapper.CacheMapper
 import jdls.one.data.repository.MoviesCache
 import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 open class MoviesCacheDataSource @Inject constructor(
   private val movieDatabase: MovieDatabase,
-  private val entityMapper: CachedMovieMapper
+  private val entityMapper: CacheMapper
 ) : MoviesCache {
 
   internal fun getDatabase(): MovieDatabase {
@@ -22,13 +22,13 @@ open class MoviesCacheDataSource @Inject constructor(
     return Single.defer {
       Single.just(movieDatabase.cachedMovieDao().getPopularTVShows())
     }.map {
-      MovieResults(it.map { cachedMovie -> entityMapper.mapFromCached(cachedMovie) }, 1)
+      MovieResults(it.map { cachedMovie -> entityMapper.reverseMap(cachedMovie) }, 1)
     }
   }
 
   override fun saveMovie(movie: Movie): Completable {
     return Completable.defer {
-      movieDatabase.cachedMovieDao().insertMovie(entityMapper.mapToCached(movie))
+      movieDatabase.cachedMovieDao().insertMovie(entityMapper.map(movie))
       Completable.complete()
     }
   }

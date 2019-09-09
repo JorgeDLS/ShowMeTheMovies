@@ -1,6 +1,7 @@
 package jdls.one.data.mapper
 
 import jdls.one.data.model.RawMovieSearchResults
+import jdls.one.data.utils.anyMovieResults
 import jdls.one.data.utils.anyMovieSearchResults
 import jdls.one.domain.model.MovieResults
 import org.junit.Before
@@ -8,24 +9,30 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 @RunWith(JUnit4::class)
-class MoviesSearchMapperTest {
+class RemoteMapperTest {
 
-  private lateinit var moviesSearchMapper: MoviesSearchMapper
+  private lateinit var remoteMapper: RemoteMapper
 
   @Before
   fun setUp() {
-    moviesSearchMapper = MoviesSearchMapper()
+    remoteMapper = RemoteMapper()
   }
 
   @Test
   fun properRawValueMapsToValue() {
     val movieSearchResults = anyMovieSearchResults()
 
-    val movieResults = moviesSearchMapper.mapFromApi(movieSearchResults)
+    val movieResults = remoteMapper.map(movieSearchResults)
 
     assertDataIsEqual(movieSearchResults, movieResults)
+  }
+
+  @Test
+  fun reverseMapThrowsUnsupportedOperationException() {
+    assertFailsWith<UnsupportedOperationException> { remoteMapper.reverseMap(anyMovieResults()) }
   }
 
   private fun assertDataIsEqual(
@@ -37,7 +44,7 @@ class MoviesSearchMapperTest {
     assertEquals(rawMovieSearchResults.results[0].name, movieResults.movies[0].title)
     assertEquals(rawMovieSearchResults.results[0].voteAverage, movieResults.movies[0].voteAverage)
     assertEquals(
-      moviesSearchMapper.buildBackdropCompletePath(rawMovieSearchResults.results[0].backdropPath),
+      remoteMapper.buildBackdropCompletePath(rawMovieSearchResults.results[0].backdropPath),
       movieResults.movies[0].backDropUrl
     )
   }

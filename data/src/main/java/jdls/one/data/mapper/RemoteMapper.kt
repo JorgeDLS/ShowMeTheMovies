@@ -5,12 +5,14 @@ import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
 import javax.inject.Inject
 
-open class MoviesSearchMapper @Inject constructor() : Mapper<RawMovieSearchResults, MovieResults> {
+open class RemoteMapper @Inject constructor() : Mapper<RawMovieSearchResults, MovieResults> {
+  override fun reverseMap(entity: MovieResults): RawMovieSearchResults =
+    throw UnsupportedOperationException("This method cannot be called in MoviesSearchMapper.")
 
   /**
    * Map an instance of a [RawMovieSearchResults] to a [MovieResults] model
    */
-  override fun mapFromApi(raw: RawMovieSearchResults): MovieResults =
+  override fun map(raw: RawMovieSearchResults): MovieResults =
     MovieResults(
       raw.results.map {
         Movie(

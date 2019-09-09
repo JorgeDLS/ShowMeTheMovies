@@ -1,5 +1,6 @@
 package jdls.one.data.mapper
 
-interface Mapper<in R, out E> {
-  fun mapFromApi(raw: R): E
+interface Mapper<R, E> {
+  fun map(raw: R): E
+  fun reverseMap(entity: E): R
 }
