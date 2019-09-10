@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
   private fun setupScreenForError(message: String) {
     Log.e("Error", message) //In a real project we should send this error to Crashlytics.
     progress.gone()
-    viewEmpty.gone()
+    if (moviesAdapter.itemCount > 0) viewEmpty.gone() else viewEmpty.visible()
     recyclerView.showSnackbar(R.string.labelErrorResult) {
       action(R.string.labelTryAgain) { viewModel.fetchPopularTVShows() }
     }

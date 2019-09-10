@@ -40,8 +40,8 @@ object MoviesServiceFactory {
     return OkHttpClient.Builder()
         .addInterceptor(apiKeyInterceptor)
         .addInterceptor(httpLoggingInterceptor)
-        .connectTimeout(120, TimeUnit.SECONDS)
-        .readTimeout(120, TimeUnit.SECONDS)
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
         .build()
   }
 

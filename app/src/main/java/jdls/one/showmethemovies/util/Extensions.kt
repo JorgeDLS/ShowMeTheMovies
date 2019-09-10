@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
 import jdls.one.showmethemovies.R
 
@@ -32,6 +33,7 @@ fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (Vi
 fun ImageView.loadImage(url: String?) {
   Glide.with(context)
     .load(url)
+    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
     .error(R.color.colorSecondaryDark)
     .into(this)
 }

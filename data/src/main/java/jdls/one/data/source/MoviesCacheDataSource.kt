@@ -19,24 +19,19 @@ open class MoviesCacheDataSource @Inject constructor(
   }
 
   override fun getPopularTVShows(): Single<MovieResults> {
-    return Single.defer {
-      Single.just(movieDatabase.cachedMovieDao().getPopularTVShows())
-    }.map {
-      MovieResults(it.map { cachedMovie -> entityMapper.reverseMap(cachedMovie) }, 1)
-    }
+    return Single.just(movieDatabase.cachedMovieDao().getPopularTVShows())
+      .map {
+        MovieResults(it.map { cachedMovie -> entityMapper.reverseMap(cachedMovie) }, 1)
+      }
   }
 
   override fun saveMovie(movie: Movie): Completable {
-    return Completable.defer {
-      movieDatabase.cachedMovieDao().insertMovie(entityMapper.map(movie))
-      Completable.complete()
-    }
+    movieDatabase.cachedMovieDao().insertMovie(entityMapper.map(movie))
+    return Completable.complete()
   }
 
   override fun deleteMovies(): Completable {
-    return Completable.defer {
-      movieDatabase.cachedMovieDao().clearMovies()
-      Completable.complete()
-    }
+    movieDatabase.cachedMovieDao().clearMovies()
+    return Completable.complete()
   }
 }

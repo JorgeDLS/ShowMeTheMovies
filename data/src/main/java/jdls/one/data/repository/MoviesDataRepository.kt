@@ -7,6 +7,8 @@ import jdls.one.data.source.MoviesCacheDataSource
 import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
 import jdls.one.domain.repository.MoviesRepository
+import java.net.ConnectException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MoviesDataRepository @Inject constructor(
@@ -16,6 +18,14 @@ class MoviesDataRepository @Inject constructor(
 
   override fun getPopularTVShows(language: String, page: Int): Single<MovieResults> {
     return apiDataSource.getPopularTVShows(language, page)
+      .flatMap { it.movies.map { movie -> cacheDataSource.saveMovie(movie) }; Single.just(it) }
+      .onErrorResumeNext {
+        when (it) {
+          is ConnectException, is UnknownHostException ->
+            cacheDataSource.getPopularTVShows()
+          else -> Single.error(it)
+        }
+      }
   }
 }
 
