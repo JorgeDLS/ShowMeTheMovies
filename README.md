@@ -13,7 +13,8 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Dagger2 used to handle Dependency Injection.
 * Retrofit is used to get data from TheMovieDB API (v3)
 * Glide is used for image loading.
-* For testing the application, Mockito, jUnit4, assertJ and espresso are used.
+* For testing the application, Mockito, jUnit4, assertJ, Robolectric and espresso are used.
+* When there's no internet connection, results are loaded from Cache with Room and images are retrieved from Glide's Cache.
 
 <img src="app/appGifExample.gif" width="180" alt="App example Gif">
 
