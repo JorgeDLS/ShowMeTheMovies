@@ -27,6 +27,7 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Use AAC Paging :page_with_curl:
 * More features :apple:
 * More tests :bug:
+* Add CI/CD 🤖
 
 ## License
 
