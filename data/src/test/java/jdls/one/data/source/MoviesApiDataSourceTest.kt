@@ -1,11 +1,9 @@
 package jdls.one.data.source
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.atLeastOnce
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.*
 import jdls.one.data.mapper.RemoteMapper
 import jdls.one.data.service.MoviesServiceFactory
+import jdls.one.data.utils.anyMovieResults
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,8 +21,9 @@ class MoviesApiDataSourceTest {
   @Before
   fun setUp() {
     moviesService = MoviesServiceFactory.makeMoviesService("5d967c7c335764f39b1efbe9c5de9760", true)
-    remoteMapper = RemoteMapper()
+    remoteMapper = mock()
     moviesApiDataSource = MoviesApiDataSource(moviesService, remoteMapper)
+    whenever(remoteMapper.map(any())).doReturn(anyMovieResults())
   }
 
   @Test

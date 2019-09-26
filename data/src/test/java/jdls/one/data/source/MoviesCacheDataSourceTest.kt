@@ -1,13 +1,12 @@
 package jdls.one.data.source
 
 import androidx.room.Room
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.atLeastOnce
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.*
 import jdls.one.data.cache.db.MovieDatabase
 import jdls.one.data.mapper.CacheMapper
+import jdls.one.data.utils.anyCachedMovie
 import jdls.one.data.utils.anyMovie
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -22,9 +21,15 @@ class MoviesCacheDataSourceTest {
   private var movieDatabase =
     Room.inMemoryDatabaseBuilder(RuntimeEnvironment.application, MovieDatabase::class.java)
       .allowMainThreadQueries().build()
-  private var entityMapper = CacheMapper()
+  private var cacheMapper: CacheMapper = mock()
 
-  private var moviesCacheDataSource = MoviesCacheDataSource(movieDatabase, entityMapper)
+  private var moviesCacheDataSource = MoviesCacheDataSource(movieDatabase, cacheMapper)
+
+  @Before
+  fun setUp() {
+    whenever(cacheMapper.map(any())).doReturn(anyCachedMovie())
+    whenever(cacheMapper.reverseMap(any())).doReturn(anyMovie())
+  }
 
   @Test
   fun saveMovieCompletes() {
@@ -54,15 +59,12 @@ class MoviesCacheDataSourceTest {
 
   @Test
   fun getPopularTVShowsCallsEntityMapperReverseMap() {
-    entityMapper = spy(entityMapper)
-    moviesCacheDataSource = MoviesCacheDataSource(movieDatabase, entityMapper)
-
     moviesCacheDataSource.saveMovie(anyMovie())
     val testObserver = moviesCacheDataSource.getPopularTVShows().test()
 
     testObserver.assertComplete()
     testObserver.dispose()
-    verify(entityMapper, atLeastOnce()).reverseMap(any())
+    verify(cacheMapper, atLeastOnce()).reverseMap(any())
   }
 
   @Test

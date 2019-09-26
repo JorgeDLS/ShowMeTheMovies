@@ -1,5 +1,6 @@
 package jdls.one.data.utils
 
+import jdls.one.data.model.CachedMovie
 import jdls.one.data.model.RawMovieSearchResults
 import jdls.one.data.model.RawMovie
 import jdls.one.domain.model.Movie
@@ -26,3 +27,5 @@ fun anyRawMovie() = RawMovie(
 fun anyMovieResults() = MovieResults(listOf(anyMovie()), 2)
 
 fun anyMovie() = Movie(12, "Testeando a Forrester", 98.31, null)
+
+fun anyCachedMovie() = CachedMovie(12, "Testeando a Forrester", 98.31, null)
