@@ -7,8 +7,12 @@ import dagger.Module
 import dagger.Provides
 import jdls.one.data.cache.db.MovieDatabase
 import jdls.one.data.executor.JobExecutor
+import jdls.one.data.repository.MoviesCache
 import jdls.one.data.repository.MoviesDataRepository
+import jdls.one.data.repository.MoviesRemote
 import jdls.one.data.service.MoviesServiceFactory
+import jdls.one.data.source.MoviesApiDataSource
+import jdls.one.data.source.MoviesCacheDataSource
 import jdls.one.domain.executor.ThreadExecutor
 import jdls.one.domain.repository.MoviesRepository
 import jdls.one.showmethemovies.BuildConfig
@@ -36,6 +40,12 @@ abstract class DataModule {
 
   @Binds
   abstract fun bindMoviesRepository(moviesDataRepository: MoviesDataRepository): MoviesRepository
+
+  @Binds
+  abstract fun bindMoviesRemote(moviesApiDataSource: MoviesApiDataSource): MoviesRemote
+
+  @Binds
+  abstract fun bindMoviesCache(moviesCacheDataSource: MoviesCacheDataSource): MoviesCache
 
   @Binds
   abstract fun bindThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor

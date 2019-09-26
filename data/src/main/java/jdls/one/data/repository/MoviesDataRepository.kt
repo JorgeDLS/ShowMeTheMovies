@@ -2,8 +2,6 @@ package jdls.one.data.repository
 
 import io.reactivex.Completable
 import io.reactivex.Single
-import jdls.one.data.source.MoviesApiDataSource
-import jdls.one.data.source.MoviesCacheDataSource
 import jdls.one.domain.model.Movie
 import jdls.one.domain.model.MovieResults
 import jdls.one.domain.repository.MoviesRepository
@@ -12,17 +10,17 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MoviesDataRepository @Inject constructor(
-  private val apiDataSource: MoviesApiDataSource,
-  private val cacheDataSource: MoviesCacheDataSource
+  private val moviesRemote: MoviesRemote,
+  private val moviesCache: MoviesCache
 ) : MoviesRepository {
 
   override fun getPopularTVShows(language: String, page: Int): Single<MovieResults> {
-    return apiDataSource.getPopularTVShows(language, page)
-      .flatMap { it.movies.map { movie -> cacheDataSource.saveMovie(movie) }; Single.just(it) }
+    return moviesRemote.getPopularTVShows(language, page)
+      .flatMap { it.movies.map { movie -> moviesCache.saveMovie(movie) }; Single.just(it) }
       .onErrorResumeNext {
         when (it) {
           is ConnectException, is UnknownHostException ->
-            cacheDataSource.getPopularTVShows()
+            moviesCache.getPopularTVShows()
           else -> Single.error(it)
         }
       }
