@@ -7,7 +7,6 @@ import jdls.one.showmethemovies.main.TVShowsListViewModel.GetPopularTVShowsSubsc
 import jdls.one.showmethemovies.state.ResourceState
 import jdls.one.showmethemovies.utils.anyMovie
 import jdls.one.showmethemovies.utils.anyMovieResults
-import jdls.one.showmethemovies.utils.callOnCleared
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -36,7 +35,6 @@ class TVShowsListViewModelTest {
     captor = argumentCaptor()
     getPopularTVShows = mock()
     tvShowsListViewModel = TVShowsListViewModel(getPopularTVShows)
-    doNothing().whenever(getPopularTVShows).dispose()
   }
 
   @Test
@@ -119,40 +117,10 @@ class TVShowsListViewModelTest {
   }
 
   @Test
-  fun onClearedCallsDisposalOfGetPopularTVShows() {
-    tvShowsListViewModel.callOnCleared()
-
-    verify(getPopularTVShows, times(1)).dispose()
-  }
-
-  @Test
   fun requestMoreDataIncrementsCurrentPage() {
     val currentPage = tvShowsListViewModel.currentPage
     tvShowsListViewModel.requestMoreData()
 
     assert(currentPage + 1 == tvShowsListViewModel.currentPage)
-  }
-
-  @Test
-  fun requestMoreDataNotCallsFetchPopularTVShowsWhenThereAreNoMorePages() {
-    val spyViewModel = spy(tvShowsListViewModel)
-    val currentPage = tvShowsListViewModel.currentPage
-    tvShowsListViewModel = spyViewModel
-    tvShowsListViewModel.totalPages = currentPage - 1
-
-    tvShowsListViewModel.requestMoreData()
-
-    verify(spyViewModel, times(0)).fetchPopularTVShows()
-  }
-
-  @Test
-  fun requestMoreDataCallsFetchPopularTVShowsWhenThereAreMorePagesLeft() {
-    val spyViewModel = spy(tvShowsListViewModel)
-    tvShowsListViewModel = spyViewModel
-    tvShowsListViewModel.totalPages = 2
-
-    tvShowsListViewModel.requestMoreData()
-
-    verify(spyViewModel, times(1)).fetchPopularTVShows()
   }
 }
