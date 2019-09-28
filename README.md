@@ -1,4 +1,4 @@
-# <img src="app/ic_launcher-web.png" width="26" alt="logo" align="bottom"> ShowMeTheMovies
+# <img src="app/ic_launcher-web.png" width="26" alt="logo" align="bottom"> ShowMeTheMovies [![Build Status](https://app.bitrise.io/app/a136e6b5d1b33591/status.svg?token=GGHhJ8E-wmL-_MT-PX-qsA&branch=master)](https://app.bitrise.io/app/a136e6b5d1b33591)
 
 A simple app that tries to follow Clean Architecture, the SOLID principles and best practices.
 
@@ -15,6 +15,7 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Glide is used for image loading.
 * For testing the application, Mockito, jUnit4, assertJ, Robolectric and espresso are used.
 * When there's no internet connection, results are loaded from Cache with Room and images are retrieved from Glide's Cache.
+* BitRise is used as CI platform.
 
 <img src="app/appGifExample.gif" width="180" alt="App example Gif">
 
@@ -27,7 +28,6 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Use AAC Paging :page_with_curl:
 * More features :apple:
 * More tests :bug:
-* Add CI/CD 🤖
 
 ## License
 

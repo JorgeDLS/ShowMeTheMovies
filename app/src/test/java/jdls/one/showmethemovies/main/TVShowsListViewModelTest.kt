@@ -36,6 +36,7 @@ class TVShowsListViewModelTest {
     captor = argumentCaptor()
     getPopularTVShows = mock()
     tvShowsListViewModel = TVShowsListViewModel(getPopularTVShows)
+    doNothing().whenever(getPopularTVShows).dispose()
   }
 
   @Test
