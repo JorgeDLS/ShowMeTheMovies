@@ -20,6 +20,11 @@ allprojects {
     google()
     jcenter()
   }
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions.jvmTarget = "$rootProject.jvmTarget"
+    kotlinOptions.allWarningsAsErrors = true
+    kotlinOptions.freeCompilerArgs += ["-Xuse-experimental=kotlin.Experimental", "-Xskip-runtime-version-check"]
+  }
 }
 
 task clean(type: Delete) {

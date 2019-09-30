@@ -20,36 +20,39 @@ object MoviesServiceFactory {
 
   fun makeMoviesService(apiKey: String, isDebug: Boolean): MoviesService {
     val okHttpClient = makeOkHttpClient(
-        makeApiKeyInterceptor(apiKey),
-        makeLoggingInterceptor(isDebug)
+      makeApiKeyInterceptor(apiKey),
+      makeLoggingInterceptor(isDebug)
     )
     return makeMoviesService(okHttpClient, makeGson())
   }
 
   private fun makeMoviesService(okHttpClient: OkHttpClient, gson: Gson): MoviesService {
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.themoviedb.org/3/")
-        .client(okHttpClient)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
+      .baseUrl("https://api.themoviedb.org/3/")
+      .client(okHttpClient)
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+      .addConverterFactory(GsonConverterFactory.create(gson))
+      .build()
     return retrofit.create(MoviesService::class.java)
   }
 
-  private fun makeOkHttpClient(apiKeyInterceptor: Interceptor, httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+  private fun makeOkHttpClient(
+    apiKeyInterceptor: Interceptor,
+    httpLoggingInterceptor: HttpLoggingInterceptor
+  ): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(apiKeyInterceptor)
-        .addInterceptor(httpLoggingInterceptor)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .build()
+      .addInterceptor(apiKeyInterceptor)
+      .addInterceptor(httpLoggingInterceptor)
+      .connectTimeout(30, TimeUnit.SECONDS)
+      .readTimeout(30, TimeUnit.SECONDS)
+      .build()
   }
 
   private fun makeGson(): Gson {
     return GsonBuilder()
-        .setLenient()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        .create()
+      .setLenient()
+      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+      .create()
   }
 
   private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
@@ -64,15 +67,15 @@ object MoviesServiceFactory {
   private fun makeApiKeyInterceptor(apiKey: String): Interceptor {
     return Interceptor { chain ->
       val originalRequest = chain.request()
-      val originalHttpUrl = originalRequest.url()
+      val originalHttpUrl = originalRequest.url
 
       val url = originalHttpUrl.newBuilder()
-          .addQueryParameter("api_key", apiKey)
-          .build()
+        .addQueryParameter("api_key", apiKey)
+        .build()
 
       // Request customization: add request headers
       val requestBuilder = originalRequest.newBuilder()
-          .url(url)
+        .url(url)
 
       val request = requestBuilder.build()
       chain.proceed(request)
@@ -83,8 +86,8 @@ object MoviesServiceFactory {
 
     @GET("tv/popular")
     fun getPopularTVShows(
-        @Query("language") language: String,
-        @Query("page") page: Int
+      @Query("language") language: String,
+      @Query("page") page: Int
     ): Single<RawMovieSearchResults>
 
   }
