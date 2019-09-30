@@ -86,6 +86,7 @@ dependencies {
     exclude module: 'support-annotations'
     exclude module: 'recyclerview-v7'
     exclude module: 'design'
+    exclude module: 'legacy-support-core-utils'
   }
 
   kapt appDependencies.daggerCompiler

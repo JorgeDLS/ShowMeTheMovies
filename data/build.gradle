@@ -19,7 +19,7 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     javaCompileOptions {
       annotationProcessorOptions {
-        arguments = ["room.incremental":"true"]
+        argument 'room.incremental', 'true'
       }
     }
   }
@@ -58,7 +58,6 @@ dependencies {
   implementation dataDependencies.okHttp
   implementation dataDependencies.okHttpLoggingInt
   implementation dataDependencies.roomRuntime
-
 
   testImplementation dataTestDependencies.junit
   testImplementation dataTestDependencies.kotlinJUnit

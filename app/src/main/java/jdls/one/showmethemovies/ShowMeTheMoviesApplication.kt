@@ -1,17 +1,16 @@
 package jdls.one.showmethemovies
 
-import android.app.Activity
 import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import jdls.one.showmethemovies.di.DaggerApplicationComponent
 import javax.inject.Inject
 
-class ShowMeTheMoviesApplication : Application(), HasActivityInjector {
+class ShowMeTheMoviesApplication : Application(), HasAndroidInjector {
 
   @Inject
-  lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+  lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
   override fun onCreate() {
     super.onCreate()
@@ -22,7 +21,7 @@ class ShowMeTheMoviesApplication : Application(), HasActivityInjector {
       .inject(this)
   }
 
-  override fun activityInjector(): AndroidInjector<Activity> {
+  override fun androidInjector(): AndroidInjector<Any> {
     return activityDispatchingAndroidInjector
   }
 

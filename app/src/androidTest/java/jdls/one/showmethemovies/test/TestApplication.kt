@@ -1,19 +1,18 @@
 package jdls.one.showmethemovies.test
 
-import android.app.Activity
 import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import jdls.one.showmethemovies.di.DaggerTestApplicationComponent
 import jdls.one.showmethemovies.di.TestApplicationComponent
 import javax.inject.Inject
 
-class TestApplication : Application(), HasActivityInjector {
+class TestApplication : Application(), HasAndroidInjector {
 
   @Inject
-  lateinit var injector: DispatchingAndroidInjector<Activity>
+  lateinit var injector: DispatchingAndroidInjector<Any>
 
   private lateinit var appComponent: TestApplicationComponent
 
@@ -31,7 +30,7 @@ class TestApplication : Application(), HasActivityInjector {
 
   }
 
-  override fun activityInjector(): AndroidInjector<Activity> {
+  override fun androidInjector(): AndroidInjector<Any> {
     return injector
   }
 
