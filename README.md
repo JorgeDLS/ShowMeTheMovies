@@ -12,6 +12,7 @@ A simple app that tries to follow Clean Architecture, the SOLID principles and b
 * Different objects for each DataSource and a Domain object who will be the only one appearing in app module, the other models belong to other layers.
 * Dagger2 used to handle Dependency Injection.
 * Retrofit is used to get data from TheMovieDB API (v3)
+* Data from the API is parsed using Moshi.
 * Glide is used for image loading.
 * For testing the application, Mockito, jUnit4, assertJ, Robolectric and espresso are used.
 * When there's no internet connection, results are loaded from Cache with Room and images are retrieved from Glide's Cache.
