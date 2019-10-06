@@ -31,6 +31,7 @@ ext {
   daggerVersion = '2.24'
   archVersion = '2.1.0'
   roomVersion = '2.2.0-rc01'
+  jacocoVersion = '0.1.4'
 
   //Testing
   jUnitVersion = '4.12'

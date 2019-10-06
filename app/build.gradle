@@ -1,4 +1,15 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "com.dicedmelon.gradle:jacoco-android:${rootProject.ext.jacocoVersion}"
+  }
+}
+
 apply plugin: 'com.android.application'
+
+apply plugin: 'jacoco-android'
 
 apply plugin: 'kotlin-android'
 
@@ -19,6 +30,9 @@ android {
     testInstrumentationRunner "jdls.one.showmethemovies.test.TestRunner"
   }
   buildTypes {
+    debug {
+      testCoverageEnabled true
+    }
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
