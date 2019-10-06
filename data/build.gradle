@@ -55,6 +55,8 @@ dependencies {
   implementation dataDependencies.retrofit
   implementation dataDependencies.retrofitConverter
   implementation dataDependencies.retrofitAdapter
+  implementation dataDependencies.moshi
+  implementation dataDependencies.okHttp
   implementation dataDependencies.okHttp
   implementation dataDependencies.okHttpLoggingInt
   implementation dataDependencies.roomRuntime
